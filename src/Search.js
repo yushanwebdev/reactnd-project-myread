@@ -3,7 +3,7 @@ import * as BooksAPI from './BooksAPI';
 
 export default class Search extends Component {
     state = {
-        query = ''
+        query: ''
     }
 
     render() {
