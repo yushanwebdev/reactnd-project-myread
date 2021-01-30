@@ -7,6 +7,19 @@ export default class Home extends Component {
         books: []
     }
 
+    updateBookShelf = (id, shelf) => {
+        this.setState(prevState => ({
+            books: prevState.books.map(book => {
+                book.shelf = book.id === id ? shelf : book.shelf;
+                return book;
+            })
+        }));
+        BooksAPI.update({ id }, shelf)
+            .then(result => {
+                console.log("successfully added");
+            })
+    }
+
     componentDidMount() {
         BooksAPI.getAll()
             .then(books => {
@@ -23,7 +36,7 @@ export default class Home extends Component {
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
-                <Shelves shelves={shelves} books={this.state.books} />
+                <Shelves shelves={shelves} books={this.state.books} updateBookShelf={this.updateBookShelf} />
                 <div className="open-search">
                     <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
                 </div>
