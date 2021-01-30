@@ -6,7 +6,9 @@ const BookShelves = props => {
             <div>
                 {
                     props.shelves.map(shelf => (
-                        <Shelf key={shelf.value} title={shelf.name} books={books} shelves={shelves} />
+                        <Shelf key={shelf.value} title={shelf.name} books={
+                            books.filter(book => book.shelf === shelf.value)
+                        } shelves={shelves} />
                     ))
                 }
             </div>
