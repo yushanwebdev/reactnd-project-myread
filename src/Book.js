@@ -1,7 +1,7 @@
 import ShelfSelect from "./ShelfSelect";
 
 const Book = props => {
-    const { book: { smallThumbnail, title, authors }, shelves } = props;
+    const { book: { imageLinks: { smallThumbnail }, title, authors }, shelves } = props;
     return (
         <li>
             <div className="book">
