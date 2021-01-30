@@ -1,11 +1,12 @@
-import Shelf from "./Shelf"
+import Shelf from "./Shelf";
 
-const BookShelves = props => {
+const Shelves = props => {
+    const { shelves, books } = props;
     return (
         <div className="list-books-content">
             <div>
                 {
-                    props.shelves.map(shelf => (
+                    shelves.map(shelf => (
                         <Shelf key={shelf.value} title={shelf.name} books={
                             books.filter(book => book.shelf === shelf.value)
                         } shelves={shelves} />
@@ -16,4 +17,4 @@ const BookShelves = props => {
     )
 }
 
-export default BookShelves;
+export default Shelves;

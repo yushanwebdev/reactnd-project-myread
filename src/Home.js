@@ -17,13 +17,13 @@ export default class Home extends Component {
     }
 
     render() {
-        const { bookShelves } = this.props;
+        const { shelves } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
-                <Shelves shelves={bookShelves} books={this.state.books} />
+                <Shelves shelves={shelves} books={this.state.books} />
                 <div className="open-search">
                     <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
                 </div>
