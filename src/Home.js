@@ -7,13 +7,23 @@ export default class Home extends Component {
         books: []
     }
 
+    componentDidMount() {
+        BooksAPI.getAll()
+            .then(books => {
+                this.setState(prevState => ({
+                    books: books
+                }))
+            })
+    }
+
     render() {
+        const { shelves } = props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
-                <Shelves />
+                <Shelves shelves={shelves} books={books} />
                 <div className="open-search">
                     <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
                 </div>
