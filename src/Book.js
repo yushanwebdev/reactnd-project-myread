@@ -1,4 +1,4 @@
-import ShelfSelect from "./ShelfSelect"
+import ShelfSelect from "./ShelfSelect";
 
 const Book = props => {
     const { image, shelves, title, authors } = props;
