@@ -16,11 +16,17 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route
           exact
-          path="/" render={() => (
+          path="/" 
+          render={() => (
             <Home shelves={bookShelves} />
           )}
         />
-        <Route path="/search" component={Search} />
+        <Route 
+          path="/search" 
+          render={() => (
+            <Search shelves={bookShelves} />
+          )} 
+        />
       </div>
     )
   }

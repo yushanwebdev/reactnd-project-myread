@@ -1,12 +1,41 @@
 import { Component } from "react";
+import BookList from "./BookList";
 import * as BooksAPI from './BooksAPI';
 
 export default class Search extends Component {
     state = {
-        query: ''
+        query: '',
+        books: []
+    }
+
+    onTyping = e => {
+        const val = e.target.value;
+        this.setState(prevState => ({
+            query: val
+        }));
+        BooksAPI.search(val)
+            .then(books => {
+                this.setState(prevState => ({
+                    books: books
+                }))
+            })
+    }
+
+    updateBookShelf = (id, shelf) => {
+        this.setState(prevState => ({
+            books: prevState.books.map(book => {
+                book.shelf = book.id === id ? shelf: book.shelf;
+                return book;
+            })
+        }))
+        BooksAPI.update({ id }, shelf)
+            .then(result => {
+                console.log("successfully added");
+            })
     }
 
     render() {
+        const { books, query } = this.state;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -20,12 +49,11 @@ export default class Search extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                        <input type="text" placeholder="Search by title or author" />
-
+                        <input type="text" placeholder="Search by title or author" value={query} onChange={this.onTyping} />
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid"></ol>
+                    <BookList books={books} shelves={this.props.shelves} updateBookShelf={this.updateBookShelf} />
                 </div>
             </div>
         )
