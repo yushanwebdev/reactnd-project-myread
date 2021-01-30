@@ -3,9 +3,9 @@ import './App.css';
 import Home from './Home';
 
 const bookShelves = [
-  {id: 'currentlyReading', name: 'Currently Reading'},
-  {id: 'wantToRead', name: 'Want to Read'},
-  {id: 'read', name: 'Read'},
+  {name: 'Currently Reading', value: 'currentlyReading'},
+  {name: 'Want to Read', value: 'wantToRead'},
+  {name: 'Read', value: 'read'},
 ]
 
 class BooksApp extends React.Component {
