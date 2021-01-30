@@ -7,12 +7,13 @@ export default class ShelfSelect extends Component {
     }
 
     render() {
+        const { bookShelf, shelves } = this.props;
         return (
             <div className="book-shelf-changer">
-                <select onChange={this.onSelectShelf} value={this.props.bookShelf}>
+                <select onChange={this.onSelectShelf} value={bookShelf ? bookShelf : "none"}>
                     <option value="move" disabled>Move to...</option>
                     {
-                        this.props.shelves.map(shelf => (
+                        shelves.map(shelf => (
                             <ShelfSelectItem key={shelf.value} name={shelf.name} value={shelf.value} />
                         ))
                     }
