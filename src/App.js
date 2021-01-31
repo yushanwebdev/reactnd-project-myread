@@ -26,17 +26,22 @@ class BooksApp extends React.Component {
   }
 
   getSearchBooksList = (query, allBooks) => {
-    this.getFilteredBooks(query)
-      .then(filteredBooks => {
-        if (filteredBooks && !filteredBooks.error)
-          this.setState(prevState => ({
-            allBooks: allBooks,
-            searchBooks: filteredBooks.map(book => {
-              const sameBook = allBooks.find(allBook => allBook.id === book.id);
-              return sameBook ? sameBook : book;
-            })
-          }))
-      })
+    if (query !== "")
+      this.getFilteredBooks(query)
+        .then(filteredBooks => {
+          if (filteredBooks && !filteredBooks.error)
+            this.setState(prevState => ({
+              allBooks: allBooks,
+              searchBooks: filteredBooks.map(book => {
+                const sameBook = allBooks.find(allBook => allBook.id === book.id);
+                return sameBook ? sameBook : book;
+              })
+            }))
+        })
+    else
+      this.setState(prevState => ({
+        searchBooks: []
+      }))
   }
 
   loadAllBooks = () => {
@@ -50,12 +55,12 @@ class BooksApp extends React.Component {
   }
 
   loadSearchBooks = (query) => {
-    if (this.state.allBooks)
+    if (this.state.allBooks.length)
       this.getSearchBooksList(query, this.state.allBooks);
     else
       this.getAllBooks()
         .then(allBooks => {
-          this.getSearchBooksList(query, this.state.allBooks);
+          this.getSearchBooksList(query, allBooks);
         })
   }
 
@@ -85,22 +90,22 @@ class BooksApp extends React.Component {
           exact
           path="/"
           render={() => (
-            <Home 
-              shelves={bookShelves} 
-              books={allBooks} 
-              loadAllBooks={this.loadAllBooks} 
-              updateBookShelf={this.updateBookShelf} 
+            <Home
+              shelves={bookShelves}
+              books={allBooks}
+              loadAllBooks={this.loadAllBooks}
+              updateBookShelf={this.updateBookShelf}
             />
           )}
         />
         <Route
           path="/search"
           render={() => (
-            <Search 
-              shelves={bookShelves} 
-              books={searchBooks} 
-              loadSearchBooks={this.loadSearchBooks} 
-              updateBookShelf={this.updateBookShelf} 
+            <Search
+              shelves={bookShelves}
+              books={searchBooks}
+              loadSearchBooks={this.loadSearchBooks}
+              updateBookShelf={this.updateBookShelf}
             />
           )}
         />
