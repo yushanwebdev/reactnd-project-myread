@@ -25,11 +25,18 @@ class BooksApp extends React.Component {
     return BooksAPI.search(query);
   }
 
-  updateBookList = (selectedBook, shelf, books) => {
-      let bookList;
-      selectedBook.shelf = shelf;
-      bookList = books.length && [...new Set([...books, selectedBook])];
-      return bookList;
+  getSearchBooksList = (query, allBooks) => {
+    this.getFilteredBooks(query)
+      .then(filteredBooks => {
+        if (filteredBooks && !filteredBooks.error)
+          this.setState(prevState => ({
+            allBooks: allBooks,
+            searchBooks: filteredBooks.map(book => {
+              const sameBook = allBooks.find(allBook => allBook.id === book.id);
+              return sameBook ? sameBook : book;
+            })
+          }))
+      })
   }
 
   loadAllBooks = () => {
@@ -43,20 +50,13 @@ class BooksApp extends React.Component {
   }
 
   loadSearchBooks = (query) => {
-    this.getAllBooks()
-      .then(allBooks => {
-        this.getFilteredBooks(query)
-          .then(filteredBooks => {
-            if(filteredBooks && !filteredBooks.error)
-            this.setState(prevState => ({
-              allBooks: allBooks,
-              searchBooks: filteredBooks.map(book => {
-                const sameBook = allBooks.find(allBook => allBook.id === book.id);
-                return sameBook ? sameBook : book;
-              })
-            }))
-          })
-      })
+    if (this.state.allBooks)
+      this.getSearchBooksList(query, this.state.allBooks);
+    else
+      this.getAllBooks()
+        .then(allBooks => {
+          this.getSearchBooksList(query, this.state.allBooks);
+        })
   }
 
   updateBookShelf = (book, shelf) => {
@@ -70,6 +70,13 @@ class BooksApp extends React.Component {
       })
   }
 
+  updateBookList = (selectedBook, shelf, books) => {
+    let bookList;
+    selectedBook.shelf = shelf;
+    bookList = books.length && [...new Set([...books, selectedBook])];
+    return bookList;
+  }
+
   render() {
     const { allBooks, searchBooks } = this.state;
     return (
@@ -78,13 +85,23 @@ class BooksApp extends React.Component {
           exact
           path="/"
           render={() => (
-            <Home shelves={bookShelves} books={allBooks} loadAllBooks={this.loadAllBooks} updateBookShelf={this.updateBookShelf} />
+            <Home 
+              shelves={bookShelves} 
+              books={allBooks} 
+              loadAllBooks={this.loadAllBooks} 
+              updateBookShelf={this.updateBookShelf} 
+            />
           )}
         />
         <Route
           path="/search"
           render={() => (
-            <Search shelves={bookShelves} books={searchBooks} loadSearchBooks={this.loadSearchBooks} updateBookShelf={this.updateBookShelf} />
+            <Search 
+              shelves={bookShelves} 
+              books={searchBooks} 
+              loadSearchBooks={this.loadSearchBooks} 
+              updateBookShelf={this.updateBookShelf} 
+            />
           )}
         />
       </div>
