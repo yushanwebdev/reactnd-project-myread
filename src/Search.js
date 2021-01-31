@@ -1,8 +1,16 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import BookList from "./BookList";
 
 export default class Search extends Component {
+    static propTypes = {
+        shelves: PropTypes.array.isRequired,
+        books: PropTypes.array,
+        loadSearchBooks: PropTypes.func.isRequired,
+        updateBookShelf: PropTypes.func.isRequired
+    }
+
     state = {
         query: '',
     }
