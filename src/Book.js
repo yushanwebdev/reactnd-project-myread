@@ -1,13 +1,13 @@
 import ShelfSelect from "./ShelfSelect";
 
 const Book = props => {
-    const { book: { imageLinks: { smallThumbnail }, id, title, authors, shelf }, shelves, updateBookShelf } = props;
+    const { book, book: { imageLinks: { smallThumbnail }, title, authors }, shelves, updateBookShelf } = props;
     return (
         <li>
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${smallThumbnail})` }}></div>
-                    <ShelfSelect shelves={shelves} bookID={id} bookShelf={shelf} updateBookShelf={updateBookShelf} />
+                    <ShelfSelect shelves={shelves} book={book} updateBookShelf={updateBookShelf} />
                 </div>
                 <div className="book-title">{title}</div>
                 <div className="book-authors">{
