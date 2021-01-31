@@ -7,7 +7,14 @@ const Shelves = props => {
             <div>
                 {
                     shelves.map(shelf => (
-                        <Shelf key={shelf.value} title={shelf.name} value={shelf.value} books={books} shelves={shelves} updateBookShelf={updateBookShelf} />
+                        <Shelf 
+                            key={shelf.value} 
+                            title={shelf.name} 
+                            value={shelf.value} 
+                            books={books} 
+                            shelves={shelves} 
+                            updateBookShelf={updateBookShelf} 
+                        />
                     ))
                 }
             </div>
