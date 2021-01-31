@@ -6,14 +6,14 @@ const BookList = props => {
     return (
         <div className="bookshelf-books">
             <ol className="books-grid">
-                {books && books.map(book => (
+                {books ? books.map(book => (
                     <Book 
                         key={book.id} 
                         book={book} 
                         shelves={shelves} 
                         updateBookShelf={updateBookShelf} 
                     />
-                ))}
+                )) : ''}
             </ol>
         </div>
     )

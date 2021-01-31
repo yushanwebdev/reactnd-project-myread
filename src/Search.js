@@ -25,7 +25,7 @@ export default class Search extends Component {
 
     render() {
         const { query } = this.state;
-        const { books, shelves, updateBookShelf } = this.props
+        const { books, shelves, updateBookShelf, searchStatus } = this.props
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -52,6 +52,7 @@ export default class Search extends Component {
                         updateBookShelf={updateBookShelf} 
                     />
                 </div>
+                {!searchStatus ? <p className="search-status">Results Not Found</p> : ""}
             </div>
         )
     }

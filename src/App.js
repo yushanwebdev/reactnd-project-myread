@@ -14,7 +14,8 @@ const bookShelves = [
 class BooksApp extends React.Component {
   state = {
     allBooks: [],
-    searchBooks: []
+    searchBooks: [],
+    searchStatus: true
   }
 
   getAllBooks = () => {
@@ -35,12 +36,18 @@ class BooksApp extends React.Component {
               searchBooks: filteredBooks.map(book => {
                 const sameBook = allBooks.find(allBook => allBook.id === book.id);
                 return sameBook ? sameBook : book;
-              })
+              }),
+              searchStatus: true
+            }))
+          else if(filteredBooks.error)
+            this.setState(prevState => ({
+              searchStatus: false
             }))
         })
     else
       this.setState(prevState => ({
-        searchBooks: []
+        searchBooks: [],
+        searchStatus: true
       }))
   }
 
@@ -67,7 +74,8 @@ class BooksApp extends React.Component {
   updateBookShelf = (book, shelf) => {
     this.setState(prevState => ({
       allBooks: this.updateBookList(book, shelf, prevState.allBooks),
-      searchBooks: this.updateBookList(book, shelf, prevState.searchBooks)
+      searchBooks: this.updateBookList(book, shelf, prevState.searchBooks),
+      searchStatus: true
     }));
     BooksAPI.update(book, shelf)
       .then(result => {
@@ -83,7 +91,7 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    const { allBooks, searchBooks } = this.state;
+    const { allBooks, searchBooks, searchStatus } = this.state;
     return (
       <div className="app">
         <Route
@@ -104,6 +112,7 @@ class BooksApp extends React.Component {
             <Search
               shelves={bookShelves}
               books={searchBooks}
+              searchStatus={searchStatus}
               loadSearchBooks={this.loadSearchBooks}
               updateBookShelf={this.updateBookShelf}
             />
