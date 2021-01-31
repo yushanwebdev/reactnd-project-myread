@@ -1,4 +1,5 @@
-import Book from "./Book"
+import PropTypes from "prop-types";
+import Book from "./Book";
 
 const BookList = props => {
     const { books, shelves, updateBookShelf } = props;
@@ -16,6 +17,12 @@ const BookList = props => {
             </ol>
         </div>
     )
+}
+
+BookList.propTypes = {
+    books: PropTypes.array,
+    shelves: PropTypes.array.isRequired,
+    updateBookShelf: PropTypes.func.isRequired
 }
 
 export default BookList;

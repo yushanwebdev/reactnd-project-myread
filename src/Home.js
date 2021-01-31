@@ -1,8 +1,16 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Shelves from "./Shelves";
 
 export default class Home extends Component {
+    static propTypes = {
+        shelves: PropTypes.array.isRequired,
+        books: PropTypes.array,
+        loadAllBooks: PropTypes.func.isRequired,
+        updateBookShelf: PropTypes.func.isRequired
+    }
+
     componentDidMount() {
         this.props.loadAllBooks();
     }

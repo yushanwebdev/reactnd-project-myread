@@ -1,7 +1,14 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 import ShelfSelectItem from "./ShelfSelectItem";
 
 export default class ShelfSelect extends Component {
+    static propTypes = {
+        shelves: PropTypes.array.isRequired,
+        book: PropTypes.object.isRequired,
+        updateBookShelf: PropTypes.func.isRequired
+    }
+
     onSelectShelf = e => {
         this.props.updateBookShelf(this.props.book, e.target.value);
     }
@@ -16,8 +23,7 @@ export default class ShelfSelect extends Component {
                         shelves.map(shelf => (
                             <ShelfSelectItem 
                                 key={shelf.value} 
-                                name={shelf.name} 
-                                value={shelf.value} 
+                                shelf={shelf} 
                             />
                         ))
                     }

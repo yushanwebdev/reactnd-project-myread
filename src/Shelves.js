@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Shelf from "./Shelf";
 
 const Shelves = props => {
@@ -8,9 +9,8 @@ const Shelves = props => {
                 {
                     shelves.map(shelf => (
                         <Shelf 
-                            key={shelf.value} 
-                            title={shelf.name} 
-                            value={shelf.value} 
+                            key={shelf.value}
+                            shelf={shelf} 
                             books={books} 
                             shelves={shelves} 
                             updateBookShelf={updateBookShelf} 
@@ -20,6 +20,12 @@ const Shelves = props => {
             </div>
         </div>
     )
+}
+
+Shelves.propTypes = {
+    shelves: PropTypes.array.isRequired,
+    books: PropTypes.array,
+    updateBookShelf: PropTypes.func.isRequired
 }
 
 export default Shelves;
