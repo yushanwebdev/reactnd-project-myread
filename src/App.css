@@ -153,6 +153,11 @@ button:active {
 
 .book-authors {
   color: #999;
+  margin-top: 10px;
+}
+
+.book-authors p {
+  margin: 0 0 5px;
 }
 
 .book-top {
