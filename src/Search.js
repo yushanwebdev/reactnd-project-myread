@@ -38,7 +38,11 @@ export default class Search extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BookList books={books} shelves={shelves} updateBookShelf={updateBookShelf} />
+                    <BookList 
+                        books={books} 
+                        shelves={shelves} 
+                        updateBookShelf={updateBookShelf} 
+                    />
                 </div>
             </div>
         )
