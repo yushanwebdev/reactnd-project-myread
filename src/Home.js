@@ -14,7 +14,11 @@ export default class Home extends Component {
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
-                <Shelves shelves={shelves} books={books} updateBookShelf={updateBookShelf} />
+                <Shelves 
+                    shelves={shelves} 
+                    books={books} 
+                    updateBookShelf={updateBookShelf} 
+                />
                 <div className="open-search">
                     <Link
                         to="/search"
