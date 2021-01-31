@@ -14,7 +14,11 @@ export default class ShelfSelect extends Component {
                     <option value="move" disabled>Move to...</option>
                     {
                         shelves.map(shelf => (
-                            <ShelfSelectItem key={shelf.value} name={shelf.name} value={shelf.value} />
+                            <ShelfSelectItem 
+                                key={shelf.value} 
+                                name={shelf.name} 
+                                value={shelf.value} 
+                            />
                         ))
                     }
                     <option value="none">None</option>
