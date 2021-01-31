@@ -5,9 +5,13 @@ const BookShelf = props => {
     return (
         <div className="bookshelf">
             <h2 className="bookshelf-title">{title}</h2>
-            <BookList books={
-                books.filter(book => book.shelf === value)
-            } shelves={shelves} updateBookShelf={updateBookShelf} />
+            <BookList
+                books={
+                    books.filter(book => book.shelf === value)
+                }
+                shelves={shelves}
+                updateBookShelf={updateBookShelf}
+            />
         </div>
     )
 }
