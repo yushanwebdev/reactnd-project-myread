@@ -52,6 +52,9 @@ class BooksApp extends React.Component {
   }
 
   loadAllBooks = () => {
+    this.setState(prevState => ({
+      searchBooks: []
+    }))
     if (!this.state.allBooks.length)
       this.getAllBooks()
         .then(books => {
@@ -86,7 +89,7 @@ class BooksApp extends React.Component {
   updateBookList = (selectedBook, shelf, books) => {
     let bookList;
     selectedBook.shelf = shelf;
-    bookList = books.length && [...new Set([...books, selectedBook])];
+    bookList = books && books.length ? [...new Set([...books, selectedBook])] : [];
     return bookList;
   }
 
