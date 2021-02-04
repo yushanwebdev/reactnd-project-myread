@@ -41,6 +41,7 @@ class BooksApp extends React.Component {
             }))
           else if(filteredBooks.error)
             this.setState(prevState => ({
+              searchBooks: [],
               searchStatus: false
             }))
         })
