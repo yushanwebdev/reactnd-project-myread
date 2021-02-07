@@ -1,6 +1,6 @@
 # MyReads Project
 
-This is the final assessment project for Udacity's React Fundamentals course. In the MyReads project, Create a bookshelf app that allows to select and categorize books user have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that we will use to persist information as user interact with the application.
+This is the final assessment project for Udacity's React Fundamentals course. In the MyReads project, Create a bookshelf app that allows users to select and categorize books they have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that we will use to persist information as user interact with the application.
 
 ## TL;DR
 
